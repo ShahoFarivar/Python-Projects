@@ -7,4 +7,4 @@ I left some of my codes in python here for history, some are game and others are
 
 2.tic-tac-toe game : with moderate AI
 
-3.cesar-code cryptoghraphy: with encryption and decryption.
+3.cesar-code cryptoghraphy: with encryption, decryption and bruteforce.
