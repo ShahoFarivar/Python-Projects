@@ -1,6 +1,6 @@
 import sys
 
-alpha="a b c d e f g h i j k l m n o p q r s t u v w x y z"
+alpha="a b c d e f g h i j k l m n o p q r s t u v w x y z 1 2 3 4 5 6 7 8 9 0 "
 codex=alpha.split(" ")
 phraseList=[]
 hash=[]
@@ -24,7 +24,7 @@ def get_index(letter):
 def check_key():
 	while True:
 		try:
-			key=int(input("Enter a key:(1-25) "))
+			key=int(input("Enter a key:(1-35) "))
 			#key under 25
 			return key
 		except ValueError:
@@ -40,9 +40,9 @@ def get_input():
 			phraseList.append(item)
 
 def select_mode():
-	validAnswers=["e","d","q"]
+	validAnswers=["e","d","b","q"]
 	while True:
-		answer=input("Enter e for encryption - d for decryption - q for quit: ")
+		answer=input("Enter e for encryption | d for decryption | b for brute force | q for quit: ")
 		if answer in validAnswers:
 			return answer
 		else:
@@ -59,9 +59,7 @@ def decrypt():
 			hash.append(codex[ind-key])
 		else:
 			x=len(codex)-abs(ind-key)
-			hash.append(codex[x])
-			
-		
+			hash.append(codex[x])				
 def encrypt():
 	global phraseList
 	global codex
@@ -76,6 +74,21 @@ def encrypt():
 		else:
 			x= abs((len(codex)-1)- (ind+key))-1
 			hash.append(codex[x])
+
+def brute():
+			global codex
+			global hashString
+			global key
+			global hash
+			global hashString
+			hashTemp=hash
+			for i in range(len(codex)):
+				key=i
+				encrypt()
+				print_hash()
+				hash.clear()
+				hashString=""
+				hash=hashTemp
 			
 def main_loop():
 	global key
@@ -83,13 +96,18 @@ def main_loop():
 	global phraseList
 	global hash
 	while True:
-		get_input()
-		key=check_key()
 		select=select_mode()	
 		if select=="e":
+			get_input()
+			key=check_key()
 			encrypt()
 		elif select=="d":
+			get_input()
+			key=check_key()
 			decrypt()
+		elif select=="b":
+			get_input()
+			brute()
 		elif select=="q":
 			sys.exit()
 		print_hash()
