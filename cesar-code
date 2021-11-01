@@ -1,0 +1,101 @@
+import sys
+
+alpha="a b c d e f g h i j k l m n o p q r s t u v w x y z"
+codex=alpha.split(" ")
+phraseList=[]
+hash=[]
+hashString=""
+key=0
+
+def print_hash():
+	global hashString
+	global hash
+	print(hashString)
+	for i in range(len(hash)):
+		hashString+=hash[i]
+	print(hashString)
+
+def get_index(letter):
+	global codex
+	for item in codex:
+		if letter ==item:
+			return codex.index(item)
+
+def check_key():
+	while True:
+		try:
+			key=int(input("Enter a key:(1-25) "))
+			#key under 25
+			return key
+		except ValueError:
+			print("Not a number.")
+
+def get_input():
+	global phraseList
+	global alpha
+	userInput=input("Enter your phrase: ")
+	userInput=userInput.lower()
+	for item in userInput:
+		if item != " " and item in alpha:
+			phraseList.append(item)
+
+def select_mode():
+	validAnswers=["e","d","q"]
+	while True:
+		answer=input("Enter e for encryption - d for decryption - q for quit: ")
+		if answer in validAnswers:
+			return answer
+		else:
+			print("Wrong input.")
+
+def decrypt():
+	global phraseList
+	global codex
+	global hash
+	global key
+	for letter in phraseList:
+		ind=get_index(letter)
+		if ind-key >=0:
+			hash.append(codex[ind-key])
+		else:
+			x=len(codex)-abs(ind-key)
+			hash.append(codex[x])
+			
+		
+def encrypt():
+	global phraseList
+	global codex
+	global hash
+	global key
+	for letter in phraseList:
+		ind=get_index(letter)
+		if ind+key < len(codex):
+			hash.append(codex[ind+key])
+		elif ind == len(codex):
+			hash.append(code[len(codex)])
+		else:
+			x= abs((len(codex)-1)- (ind+key))-1
+			hash.append(codex[x])
+			
+def main_loop():
+	global key
+	global hashString
+	global phraseList
+	global hash
+	while True:
+		get_input()
+		key=check_key()
+		select=select_mode()	
+		if select=="e":
+			encrypt()
+		elif select=="d":
+			decrypt()
+		elif select=="q":
+			sys.exit()
+		print_hash()
+		hash.clear()
+		hashString=""
+		phraseList.clear()
+		key=0
+		
+main_loop()
