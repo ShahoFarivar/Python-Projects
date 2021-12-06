@@ -1,6 +1,6 @@
 # Python-Projects
-My journey with captain Py!
 
+My journey with captain Py!
 I left some of my codes in python here for history, some are game and others are challanges.
 
 1.Bagels game
@@ -12,3 +12,5 @@ I left some of my codes in python here for history, some are game and others are
 4. Sonar game
 
 5. Pig Latin : Phrase change to pig latin format.
+
+6.  Random Password Generator
